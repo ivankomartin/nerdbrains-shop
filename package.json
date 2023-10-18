@@ -1,0 +1,84 @@
+{
+  "name": "nerdbrains-shop",
+  "version": "0.0.0",
+  "description": "Nerdbrains shop",
+  "author": "Martin Ivanko",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivankomartin/nerdbrains-shop.git"
+  },
+  "engines": {
+    "node": "16.13.0",
+    "npm": "8.19.2"
+  },
+  "scripts": {
+    "start": "cross-env react-scripts start",
+    "build": "cross-env react-scripts build",
+    "format": "cross-env prettier --write 'src/**/*.{ts,tsx,json,md}'",
+    "lint": "cross-env eslint src/**/*.{ts,tsx} --quiet",
+    "lint:fix": "cross-env eslint src/**/*.{ts,tsx} --fix",
+    "jest": "cross-env react-scripts test",
+    "clear-all": "cross-env rm -rf dist && rm -rf node_modules && npm install",
+    "re-start": "cross-env npm run clear-all && npm run start"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.10",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.54",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^5.62.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run lint && npm run format && npm test"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,json,css,md}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

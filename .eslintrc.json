@@ -1,0 +1,46 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+        "react-app",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "prettier",
+        "plugin:prettier/recommended"
+    ],
+    "plugins": [
+        "@typescript-eslint",
+        "react",
+        "react-hooks",
+        "prettier"
+    ],
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "warn",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "react/prop-types": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-empty-interface": "warn",
+        "@typescript-eslint/ban-types": [
+            "error",
+            {
+                "types": {
+                    "Object": "Používajte {} alebo objektový typ namiesto 'Object'",
+                    "String": "Používajte 'string' namiesto 'String'",
+                    "Number": "Používajte 'number' namiesto 'Number'",
+                    "Boolean": "Používajte 'boolean' namiesto 'Boolean'",
+                    "Function": "Používajte funkčný typ namiesto 'Function'"
+                }
+            }
+        ],
+        "prettier/prettier": "error"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "ignorePatterns": ["src/reportWebVitals.ts"]
+}
