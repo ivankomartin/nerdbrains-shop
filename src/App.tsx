@@ -6,7 +6,7 @@ import Shop from "./routes/shop/shop.component";
 import SignIn from "./routes/sign-in.component";
 import SignUp from "./routes/sign-up.component";
 
-function App(): JSX.Element {
+const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
@@ -18,6 +18,6 @@ function App(): JSX.Element {
       </Route>
     </Routes>
   );
-}
+};
 
 export default App;

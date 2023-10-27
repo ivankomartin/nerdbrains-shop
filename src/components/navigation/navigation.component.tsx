@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { UserContext } from "../../context/user.context";
 import {
   Button,
@@ -20,7 +20,7 @@ interface NavLink {
   link: string;
 }
 
-export default function Navigation() {
+const Navigation: React.FC = () => {
   const { currentUser } = useContext(UserContext);
 
   const navigationLinks: NavLink[] = [
@@ -34,63 +34,54 @@ export default function Navigation() {
       title: "Checkout",
       link: "/checkout",
     },
-    {
-      id: 3,
-      title: "Pricing",
-      link: "/",
-    },
   ];
 
   return (
-    <AppBar position="sticky" color="default">
-      <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="menu">
-          <Link to="/">
-            <img
-              style={{ height: "32px" }}
-              src="https://shuffle.dev/flex-ui-assets/logos/flex-ui-green-light.svg"
-              alt="Flex UI Logo"
-            />
-          </Link>
-        </IconButton>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Flex UI
-        </Typography>
-        <List
-          component="nav"
-          aria-label="main mailbox folders"
-          style={{ display: "flex", flexDirection: "row" }}
-        >
-          {navigationLinks.map((navLink) => (
-            <ListItem button key={navLink.id}>
-              <Link to={navLink.link}>
-                <Typography variant="body1">{navLink.title}</Typography>
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-        <Divider orientation="vertical" flexItem />
-        {!currentUser ? (
-          <>
-            <Button variant="outlined" component={Link} to="/sign-in">
-              Log In
+    <>
+      <AppBar position="sticky" color="default">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <Link to="/">
+              <img
+                style={{ height: "32px" }}
+                src="https://shuffle.dev/flex-ui-assets/logos/flex-ui-green-light.svg"
+                alt="Flex UI Logo"
+              />
+            </Link>
+          </IconButton>
+          <Typography variant="h6" style={{ flexGrow: 1 }}>
+            Flex UI
+          </Typography>
+          <List
+            component="nav"
+            aria-label="main mailbox folders"
+            style={{ display: "flex", flexDirection: "row" }}
+          >
+            {navigationLinks.map((navLink) => (
+              <ListItem button key={navLink.id}>
+                <Link to={navLink.link}>
+                  <Typography variant="body1">{navLink.title}</Typography>
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+          <Divider orientation="vertical" flexItem />
+          {!currentUser ? (
+            <>
+              <Link to="/sign-in">Log In</Link>
+              <Link to="/sign-up">Sign Up</Link>
+            </>
+          ) : (
+            <Button color="secondary" onClick={signOutUser}>
+              Log out
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              component={Link}
-              to="/sign-up"
-            >
-              Sign Up
-            </Button>
-          </>
-        ) : (
-          <Button color="secondary" onClick={signOutUser}>
-            Log out
-          </Button>
-        )}
-        <CartIcon />
-      </Toolbar>
-    </AppBar>
+          )}
+          <CartIcon />
+        </Toolbar>
+      </AppBar>
+      <Outlet />
+    </>
   );
-}
+};
+
+export default Navigation;
