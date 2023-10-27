@@ -1,10 +1,10 @@
-# Nerdbrains Shop 🛍️
+# react Shop 🛍️
 
 [![Node Version](https://img.shields.io/badge/node-16.13.0-brightgreen)](https://nodejs.org/)
 [![NPM Version](https://img.shields.io/badge/npm-8.19.2-brightgreen)](https://www.npmjs.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Nerdbrains Shop is a web application developed by Martin Ivanko.
+react Shop is a web application developed by Martin Ivanko.
 
 ## Installation
 
@@ -12,10 +12,10 @@ To install and run the project, follow these steps:
 
 ```bash
 # Clone the repository
-git clone https://github.com/ivankomartin/nerdbrains-shop.git
+git clone https://github.com/ivankomartin/react-shop.git
 
 # Navigate to the project directory
-cd nerdbrains-shop
+cd react-shop
 
 # Install dependencies
 npm install
@@ -24,6 +24,7 @@ npm install
 npm start
 
 ```
+
 ## Scripts
 
 - `npm start`: Start the application in development mode.

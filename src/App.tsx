@@ -1,24 +1,22 @@
-import React from "react";
-import logo from "./assets/images/logo.svg";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import "./styles/App.css";
+import { Route, Routes } from "react-router-dom";
+import Navigation from "./components/navigation/navigation.component";
+import Checkout from "./routes/checkout.component";
+import Home from "./routes/home.component";
+import Shop from "./routes/shop/shop.component";
+import SignIn from "./routes/sign-in.component";
+import SignUp from "./routes/sign-up.component";
 
 function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Stack spacing={2} direction="row">
-          <Button variant="text">Text</Button>
-          <Button variant="contained">Contained</Button>
-          <Button variant="outlined">Outlined</Button>
-        </Stack>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="sign-in" element={<SignIn />} />
+        <Route path="sign-up" element={<SignUp />} />
+        <Route path="checkout" element={<Checkout />} />
+      </Route>
+    </Routes>
   );
 }
 
