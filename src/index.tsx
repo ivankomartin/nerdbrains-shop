@@ -5,10 +5,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import reportWebVitals from "./reportWebVitals";
 import { UserProvider } from "./context/user.context";
 import { ProductProvider } from "./context/products.context";
-import CartProvider from "./context/cart.context";
 import App from "./App";
+import CartProvider from "./context/cart.context";
 import theme from "./theme";
 import "./styles/index.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -20,6 +22,7 @@ root.render(
         <UserProvider>
           <ProductProvider>
             <CartProvider>
+              <ToastContainer />
               <App />
             </CartProvider>
           </ProductProvider>
