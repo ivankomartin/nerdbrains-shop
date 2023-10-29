@@ -10,16 +10,24 @@ const theme = createTheme({
       contrastText: "rgba(255,255,255,0.87)",
     },
     error: {
+      light: "#FFE9D5",
       main: "#d32f2f",
+      dark: "#7A0916",
     },
     warning: {
+      light: "#FFF5CC",
       main: "#ffa000",
+      dark: "#7A4100",
     },
     info: {
-      main: "#303f9f",
+      light: "#CAFDF5",
+      main: "#00B8D9",
+      dark: "#003768",
     },
     success: {
-      main: "#388e3c",
+      light: "#D3FCD2",
+      main: "#00A76F",
+      dark: "#004B50",
     },
     divider: "#eeeeee",
     text: {

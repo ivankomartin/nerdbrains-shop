@@ -6,7 +6,7 @@ import {
 import { Box, Button } from "@mui/material";
 import TextField from "../common/form/TextField.component";
 import { toast } from "react-toastify";
-import CustomToast from "../common/notification/Notification.component";
+import AppNotification from "../common/notification/Notification.component";
 
 const defaultFormFields = {
   email: "",
@@ -15,7 +15,7 @@ const defaultFormFields = {
 
 export default function SignInForm(): ReactElement {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { notification } = CustomToast();
+  const { notification } = AppNotification();
 
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();
@@ -55,9 +55,7 @@ export default function SignInForm(): ReactElement {
 
   return (
     <>
-      <button
-        onClick={() => notification("Toto je úspešná správa!", "success")}
-      >
+      <button onClick={() => notification("Toto je úspešná správa!", "info")}>
         Zobraziť úspešný toast
       </button>
       <form onSubmit={handleSignIn}>
