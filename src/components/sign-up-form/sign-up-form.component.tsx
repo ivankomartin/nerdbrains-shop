@@ -9,6 +9,10 @@ import Typography from "@mui/material/Typography";
 import { Box, Button, Divider, Link as MuiLink } from "@mui/material";
 import TextField from "../common/form/TextField.component";
 import { useTheme } from "@mui/material/styles";
+import { useNotification } from "../../hook/useNotification.hook";
+import { getErrorMessage } from "../../utils/firebase/errorHandler.util";
+import useFormFields from "../../hook/useFormFields.hook";
+import { GoogleSignUpButton } from "../button/GoogleSignUpButton.component";
 
 const defaultFormFields = {
   displayName: "",
@@ -19,43 +23,39 @@ const defaultFormFields = {
 
 export default function SignInForm(): ReactElement {
   const theme = useTheme();
-  const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formFields;
-  const logGoogleUser = async () => {
+  const { notification } = useNotification();
+
+  const { formFields, handleChange, resetFormFields } =
+    useFormFields(defaultFormFields);
+
+  const signUpWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
-  };
-
-  const resetFormFields = () => {
-    setFormFields(defaultFormFields);
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert("passwords do not match");
+    if (formFields.password !== formFields.confirmPassword) {
+      notification("Passwords do not match!", "error");
       return;
     }
     try {
       const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password,
+        formFields.email,
+        formFields.password,
       );
-      await createUserDocumentFromAuth(user, { displayName });
+      await createUserDocumentFromAuth(user, {
+        displayName: formFields.displayName,
+      });
+
       resetFormFields();
+      notification("You were successfully signed up.", "success");
     } catch (error) {
-      if ((error as { code?: string }).code === "auth/email-already-in-use") {
-        alert("Cannot create user, email already in use.");
-      }
-      console.log("user creation encountered an error", error);
+      notification(getErrorMessage(error as { code?: string }), "error");
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormFields((prevState) => ({ ...prevState, [name]: value }));
-  };
   return (
     <>
       <Typography variant="h4" component="h1" mb={2}>
@@ -105,15 +105,7 @@ export default function SignInForm(): ReactElement {
 
       <Divider variant="fullWidth" sx={{ margin: theme.spacing(2, 0) }} />
 
-      <Button
-        onClick={logGoogleUser}
-        type="button"
-        fullWidth
-        variant="contained"
-        color="info"
-      >
-        Sign up With Google
-      </Button>
+      <GoogleSignUpButton onClick={signUpWithGoogle} />
 
       <Divider variant="fullWidth" sx={{ margin: theme.spacing(2, 0) }} />
 

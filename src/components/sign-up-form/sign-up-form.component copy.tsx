@@ -22,7 +22,7 @@ export default function SignUpForm() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
-  const logGoogleUser = async () => {
+  const signUpWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
   };
@@ -115,7 +115,7 @@ export default function SignUpForm() {
         </Box>
 
         <Button buttonType="primary" /* type="submit" */>Sign Up</Button>
-        <button onClick={logGoogleUser}>Sign in with Google</button>
+        <button onClick={signUpWithGoogle}>Sign in with Google</button>
         <Typography align="center">
           <span>Already have an account?</span>
           <Link to="/sign-in">

@@ -11,9 +11,12 @@ import {
   Link as MuiLink,
 } from "@mui/material";
 import TextField from "../common/form/TextField.component";
-import { useNotification } from "../../hook/useNotification.component";
+import { useNotification } from "../../hook/useNotification.hook";
 import { useTheme } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
+import { getErrorMessage } from "../../utils/firebase/errorHandler.util";
+import useFormFields from "../../hook/useFormFields.hook";
+import { GoogleSignUpButton } from "../button/GoogleSignUpButton.component";
 
 const defaultFormFields = {
   email: "",
@@ -21,16 +24,13 @@ const defaultFormFields = {
 };
 
 export default function SignInForm(): ReactElement {
-  const [formFields, setFormFields] = useState(defaultFormFields);
   const { notification } = useNotification();
   const theme = useTheme();
+  const { formFields, handleChange, resetFormFields } =
+    useFormFields(defaultFormFields);
 
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();
-  };
-
-  const resetFormFields = () => {
-    setFormFields(defaultFormFields);
   };
 
   const handleSignIn = async (event: FormEvent<HTMLFormElement>) => {
@@ -44,22 +44,8 @@ export default function SignInForm(): ReactElement {
       notification("Successfully logged in!", "success");
       resetFormFields();
     } catch (error) {
-      switch ((error as { code?: string }).code) {
-        case "auth/wrong-password":
-          notification("Incorrect password for email.", "error");
-          break;
-        case "auth/user-not-found":
-          notification("No user associated with this email.", "error");
-          break;
-        default:
-          notification("Upps.. something is wrong, contact support!", "error");
-      }
+      notification(getErrorMessage(error as { code?: string }), "error");
     }
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormFields((prevState) => ({ ...prevState, [name]: value }));
   };
 
   return (
@@ -108,21 +94,13 @@ export default function SignInForm(): ReactElement {
 
       <Divider variant="fullWidth" sx={{ margin: theme.spacing(4, 0) }} />
 
-      <Button
-        onClick={signInWithGoogle}
-        type="button"
-        fullWidth
-        variant="contained"
-        color="info"
-      >
-        Sign In With Google
-      </Button>
+      <GoogleSignUpButton onClick={signInWithGoogle} />
 
       <Divider variant="fullWidth" sx={{ margin: theme.spacing(4, 0) }} />
 
       <Box textAlign="center">
         <Typography variant="body2">
-          Dont have an account?{" "}
+          Dont have an account?{""}
           <MuiLink
             component={RouterLink}
             to="/sign-up"

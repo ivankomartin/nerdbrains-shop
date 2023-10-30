@@ -39,19 +39,23 @@ export const useNotification = (): UseNotificationReturnType => {
     const toastOptions = {
       position: toast.POSITION.TOP_RIGHT,
       closeButton: (
-        <CloseOutlinedIcon
-          sx={{ position: "relative", top: 10, color: dark }}
-        />
+        <>
+          <CloseOutlinedIcon
+            sx={{ position: "relative", top: 10, color: dark }}
+          />
+        </>
       ),
       progressStyle: { background: dark },
       style: { background: light },
     };
 
     toast(
-      <Box display="flex" alignItems="center" color={dark}>
-        {showIcon && <IconComponent sx={{ color: main }} />}
-        <Box ml={2}>{text}</Box>
-      </Box>,
+      <>
+        <Box display="flex" alignItems="center" color={dark}>
+          {showIcon && <IconComponent sx={{ color: main }} />}
+          <Box ml={2}>{text}</Box>
+        </Box>
+      </>,
       { ...toastOptions },
     );
   };
