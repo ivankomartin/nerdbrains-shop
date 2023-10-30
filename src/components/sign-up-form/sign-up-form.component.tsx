@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent, ReactElement } from "react";
+import { FormEvent, ReactElement } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
   createAuthUserWithEmailAndPassword,
@@ -6,13 +6,13 @@ import {
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
 import Typography from "@mui/material/Typography";
-import { Box, Button, Divider, Link as MuiLink } from "@mui/material";
-import TextField from "../common/form/TextField.component";
+import { Box, Divider, Link as MuiLink } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useNotification } from "../../hook/useNotification.hook";
 import { getErrorMessage } from "../../utils/firebase/errorHandler.util";
 import useFormFields from "../../hook/useFormFields.hook";
 import { GoogleSignUpButton } from "../button/GoogleSignUpButton.component";
+import { SignUpFieldGroup } from "./sign-in-form-field-group.component";
 
 const defaultFormFields = {
   displayName: "",
@@ -61,47 +61,11 @@ export default function SignInForm(): ReactElement {
       <Typography variant="h4" component="h1" mb={2}>
         Sign up
       </Typography>
-      <form onSubmit={handleSubmit}>
-        <Box display={"flex"} flexDirection={"column"} gap={4}>
-          <TextField
-            label="Display name"
-            name="displayName"
-            value={formFields.displayName}
-            onChange={handleChange}
-            required
-          />
-          <TextField
-            label="Email"
-            name="email"
-            value={formFields.email}
-            onChange={handleChange}
-            type="text"
-            autoComplete="user-name"
-            required
-          />
-          <TextField
-            label="Password"
-            name="password"
-            value={formFields.password}
-            onChange={handleChange}
-            type="password"
-            autoComplete="new-password"
-            required
-          />
-          <TextField
-            label="Confirm password"
-            name="confirmPassword"
-            value={formFields.confirmPassword}
-            onChange={handleChange}
-            type="password"
-            autoComplete="new-password"
-            required
-          />
-          <Button type="submit" fullWidth variant="contained" color="primary">
-            Sign Up
-          </Button>
-        </Box>
-      </form>
+      <SignUpFieldGroup
+        formFields={formFields}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
 
       <Divider variant="fullWidth" sx={{ margin: theme.spacing(2, 0) }} />
 
