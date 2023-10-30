@@ -3,11 +3,17 @@ import {
   signInAuthWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
-import { Box, Button, Divider, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Typography,
+  Link as MuiLink,
+} from "@mui/material";
 import TextField from "../common/form/TextField.component";
-import { toast } from "react-toastify";
 import { useNotification } from "../../hook/useNotification.component";
 import { useTheme } from "@mui/material/styles";
+import { Link as RouterLink } from "react-router-dom";
 
 const defaultFormFields = {
   email: "",
@@ -62,7 +68,7 @@ export default function SignInForm(): ReactElement {
         Sign in
       </Typography>
       <form onSubmit={handleSignIn}>
-        <Box display={"flex"} flexDirection={"column"} gap={4}>
+        <Box display={"flex"} flexDirection={"column"} gap={2}>
           <TextField
             label="Email Address"
             name="email"
@@ -84,21 +90,48 @@ export default function SignInForm(): ReactElement {
           <Button type="submit" fullWidth variant="contained" color="primary">
             Sign In
           </Button>
+
+          <Box>
+            <Typography variant="body2">
+              <MuiLink
+                component={RouterLink}
+                to="/"
+                underline="always"
+                color="primary"
+              >
+                Forgot your password?
+              </MuiLink>
+            </Typography>
+          </Box>
         </Box>
       </form>
 
-      <Divider variant="fullWidth" sx={{ margin: theme.spacing(2, 0) }} />
+      <Divider variant="fullWidth" sx={{ margin: theme.spacing(4, 0) }} />
 
-      <Box>
-        <Button
-          onClick={signInWithGoogle}
-          type="button"
-          fullWidth
-          variant="contained"
-          color="info"
-        >
-          Sign In With Google
-        </Button>
+      <Button
+        onClick={signInWithGoogle}
+        type="button"
+        fullWidth
+        variant="contained"
+        color="info"
+      >
+        Sign In With Google
+      </Button>
+
+      <Divider variant="fullWidth" sx={{ margin: theme.spacing(4, 0) }} />
+
+      <Box textAlign="center">
+        <Typography variant="body2">
+          Dont have an account?{" "}
+          <MuiLink
+            component={RouterLink}
+            to="/sign-up"
+            underline="always"
+            color="primary"
+          >
+            Sign up
+          </MuiLink>
+        </Typography>
       </Box>
     </>
   );

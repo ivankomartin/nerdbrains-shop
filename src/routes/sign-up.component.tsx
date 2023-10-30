@@ -1,15 +1,14 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import SignUpForm from "../components/sign-up-form/sign-up-form.component";
 
 const SignUp: React.FC = () => {
   return (
-    <Box py={{ xs: 24, md: 32 }} bgcolor="white">
-      <Box px={4} mx="auto" maxWidth="sm">
+    <Box display="flex" alignItems="center">
+      <Container maxWidth="xs">
         <SignUpForm />
-      </Box>
+      </Container>
     </Box>
   );
 };
-
 export default SignUp;
