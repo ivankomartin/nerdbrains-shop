@@ -1,4 +1,3 @@
-import React from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTheme } from "@mui/material/styles";
@@ -18,7 +17,15 @@ const iconComponents = {
 
 type ENotificationType = "success" | "warning" | "error" | "info";
 
-export const AppNotification = () => {
+type UseNotificationReturnType = {
+  notification: (
+    text: string,
+    type: ENotificationType,
+    showIcon?: boolean,
+  ) => void;
+};
+
+export const useNotification = (): UseNotificationReturnType => {
   const theme = useTheme();
 
   const notification = (
@@ -51,5 +58,3 @@ export const AppNotification = () => {
 
   return { notification };
 };
-
-export default AppNotification;

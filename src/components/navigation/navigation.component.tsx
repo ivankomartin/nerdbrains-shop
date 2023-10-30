@@ -10,6 +10,7 @@ import {
   List,
   ListItem,
   Divider,
+  Box,
 } from "@mui/material";
 import { signOutUser } from "./../../utils/firebase/firebase.utils";
 import CartIcon from "../cart-icon/cart-icon.component";
@@ -37,7 +38,7 @@ const Navigation: React.FC = () => {
   ];
 
   return (
-    <>
+    <Box display="grid" gridTemplateRows="auto 1fr" minHeight="100vh">
       <AppBar position="sticky" color="default">
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu">
@@ -80,7 +81,7 @@ const Navigation: React.FC = () => {
         </Toolbar>
       </AppBar>
       <Outlet />
-    </>
+    </Box>
   );
 };
 

@@ -3,10 +3,11 @@ import {
   signInAuthWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import TextField from "../common/form/TextField.component";
 import { toast } from "react-toastify";
-import AppNotification from "../common/notification/Notification.component";
+import { useNotification } from "../../hook/useNotification.component";
+import { useTheme } from "@mui/material/styles";
 
 const defaultFormFields = {
   email: "",
@@ -15,7 +16,8 @@ const defaultFormFields = {
 
 export default function SignInForm(): ReactElement {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { notification } = AppNotification();
+  const { notification } = useNotification();
+  const theme = useTheme();
 
   const signInWithGoogle = async () => {
     await signInWithGooglePopup();
@@ -33,17 +35,18 @@ export default function SignInForm(): ReactElement {
         formFields.email,
         formFields.password,
       );
+      notification("Successfully logged in!", "success");
       resetFormFields();
     } catch (error) {
       switch ((error as { code?: string }).code) {
         case "auth/wrong-password":
-          toast.error("Incorrect password for email.");
+          notification("Incorrect password for email.", "error");
           break;
         case "auth/user-not-found":
-          toast.error("No user associated with this email.");
+          notification("No user associated with this email.", "error");
           break;
         default:
-          toast.error("Upps.. something is wrong, contact support!");
+          notification("Upps.. something is wrong, contact support!", "error");
       }
     }
   };
@@ -55,11 +58,11 @@ export default function SignInForm(): ReactElement {
 
   return (
     <>
-      <button onClick={() => notification("Toto je úspešná správa!", "info")}>
-        Zobraziť úspešný toast
-      </button>
+      <Typography variant="h4" component="h1" mb={2}>
+        Sign in
+      </Typography>
       <form onSubmit={handleSignIn}>
-        <Box display={"flex"} flexDirection={"column"} gap={2}>
+        <Box display={"flex"} flexDirection={"column"} gap={4}>
           <TextField
             label="Email Address"
             name="email"
@@ -83,7 +86,10 @@ export default function SignInForm(): ReactElement {
           </Button>
         </Box>
       </form>
-      <Box mt={2}>
+
+      <Divider variant="fullWidth" sx={{ margin: theme.spacing(2, 0) }} />
+
+      <Box>
         <Button
           onClick={signInWithGoogle}
           type="button"
