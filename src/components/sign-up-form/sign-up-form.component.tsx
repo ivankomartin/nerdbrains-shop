@@ -1,18 +1,18 @@
 import { FormEvent, ReactElement } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
 import Typography from "@mui/material/Typography";
-import { Box, Divider, Link as MuiLink } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useNotification } from "../../hook/useNotification.hook";
 import { getErrorMessage } from "../../utils/firebase/errorHandler.util";
 import useFormFields from "../../hook/useFormFields.hook";
-import { GoogleSignUpButton } from "../button/GoogleSignUpButton.component";
+import { GoogleSignUpButton } from "../button/google-sign-up-button.component";
 import { SignUpFieldGroup } from "./sign-in-form-field-group.component";
+import RedirectLink from "../link/direct-link.component";
 
 const defaultFormFields = {
   displayName: "",
@@ -74,17 +74,11 @@ export default function SignInForm(): ReactElement {
       <Divider variant="fullWidth" sx={{ margin: theme.spacing(2, 0) }} />
 
       <Box textAlign="center">
-        <Typography variant="body2">
-          Already have an account?{" "}
-          <MuiLink
-            component={RouterLink}
-            to="/sign-in"
-            underline="always"
-            color="primary"
-          >
-            Sign In
-          </MuiLink>
-        </Typography>
+        <RedirectLink
+          text="Already have an account?"
+          textForLink="Sign In"
+          url="/sign-in"
+        />
       </Box>
     </>
   );

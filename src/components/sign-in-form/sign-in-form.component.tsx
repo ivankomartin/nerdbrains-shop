@@ -9,8 +9,9 @@ import { useTheme } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
 import { getErrorMessage } from "../../utils/firebase/errorHandler.util";
 import useFormFields from "../../hook/useFormFields.hook";
-import { GoogleSignUpButton } from "../button/GoogleSignUpButton.component";
+import { GoogleSignUpButton } from "../button/google-sign-up-button.component";
 import { SignInFieldGroup } from "./sign-in-form-field-group.component";
+import RedirectLink from "../link/direct-link.component";
 
 const defaultFormFields = {
   email: "",
@@ -74,17 +75,11 @@ export default function SignInForm(): ReactElement {
       <Divider variant="fullWidth" sx={{ margin: theme.spacing(4, 0) }} />
 
       <Box textAlign="center">
-        <Typography variant="body2">
-          Dont have an account?{" "}
-          <MuiLink
-            component={RouterLink}
-            to="/sign-up"
-            underline="always"
-            color="primary"
-          >
-            Sign up
-          </MuiLink>
-        </Typography>
+        <RedirectLink
+          text="Dont have an account?"
+          textForLink="Sign up"
+          url="/sign-up"
+        />
       </Box>
     </>
   );

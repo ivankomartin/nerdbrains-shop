@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { Box, Button } from "@mui/material";
-import TextField from "../common/form/TextField.component";
+import TextField from "../common/form/text-field.component";
 
 interface IFormFields {
   [key: string]: string;

@@ -1,11 +1,16 @@
-// hooks/useFormFields.ts
 import { useState, ChangeEvent } from "react";
 
 interface FormFields {
   [key: string]: string;
 }
 
-function useFormFields(initialState: FormFields) {
+interface UseFormFieldsReturnType {
+  formFields: FormFields;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  resetFormFields: () => void;
+}
+
+function useFormFields(initialState: FormFields): UseFormFieldsReturnType {
   const [formFields, setFormFields] = useState(initialState);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
