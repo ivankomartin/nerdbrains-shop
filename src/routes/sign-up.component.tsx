@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Container } from "@mui/material";
-import SignUpForm from "../components/sign-up-form/sign-up-form.component";
+import SignUpForm from "@/components/sign-up-form/sign-up-form.component";
 
 const SignUp: React.FC = () => {
   return (

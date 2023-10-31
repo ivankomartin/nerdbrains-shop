@@ -1,8 +1,8 @@
 import { Button, Box, Badge } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useContext } from "react";
-import { CartContext } from "../../context/cart.context";
-import CartDropdown from "../cart-dropdown/cart-dropdown";
+import { CartContext } from "@context/cart.context";
+import CartDropdown from "@components/cart-dropdown/cart-dropdown";
 
 const CartIcon = () => {
   const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);

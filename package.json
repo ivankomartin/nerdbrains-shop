@@ -13,8 +13,9 @@
     "npm": "8.19.2"
   },
   "scripts": {
-    "start": "cross-env react-scripts start",
-    "build": "cross-env react-scripts build",
+    "start": "cross-env craco start",
+    "build": "cross-env craco build",
+    "test": "cross-env craco test",
     "format": "cross-env prettier --write 'src/**/*.{ts,tsx,json,md}'",
     "lint": "cross-env eslint src/**/*.{ts,tsx} --quiet",
     "lint:fix": "cross-env eslint src/**/*.{ts,tsx} --fix",
@@ -48,10 +49,13 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@typescript-eslint/parser": "^5.62.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0"

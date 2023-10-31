@@ -2,7 +2,7 @@ import { createContext, useState, useEffect, ReactNode } from "react";
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
-} from "../utils/firebase/firebase.utils";
+} from "@utils/firebase/firebase.utils";
 
 type User = {
   uid: string;

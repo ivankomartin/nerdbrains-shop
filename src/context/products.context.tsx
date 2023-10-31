@@ -1,6 +1,6 @@
 import { useState, createContext, ReactNode } from "react";
-import PRODUCTS from "../data/shop-data.json";
-import { ICartItem } from "./cart.context";
+import PRODUCTS from "@data/shop-data.json";
+import { ICartItem } from "@context/cart.context";
 
 type ProductsContextType = {
   products: ICartItem[];

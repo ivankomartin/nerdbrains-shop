@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { UserContext } from "../../context/user.context";
+import { UserContext } from "@context/user.context";
 import {
   Button,
   AppBar,
@@ -12,8 +12,8 @@ import {
   Divider,
   Box,
 } from "@mui/material";
-import { signOutUser } from "./../../utils/firebase/firebase.utils";
-import CartIcon from "../cart-icon/cart-icon.component";
+import { signOutUser } from "@utils/firebase/firebase.utils";
+import CartIcon from "@components/cart-icon/cart-icon.component";
 
 interface NavLink {
   id: number;

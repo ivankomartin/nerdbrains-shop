@@ -3,16 +3,16 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
   signInWithGooglePopup,
-} from "../../utils/firebase/firebase.utils";
+} from "@utils/firebase/firebase.utils";
 import Typography from "@mui/material/Typography";
 import { Box, Divider } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { useNotification } from "../../hook/useNotification.hook";
-import { getErrorMessage } from "../../utils/firebase/errorHandler.util";
-import useFormFields from "../../hook/useFormFields.hook";
-import { GoogleSignUpButton } from "../button/google-sign-up-button.component";
-import { SignUpFieldGroup } from "./sign-in-form-field-group.component";
-import RedirectLink from "../link/direct-link.component";
+import { useNotification } from "@hook/useNotification.hook";
+import { getErrorMessage } from "@utils/firebase/errorHandler.util";
+import useFormFields from "@hook/useFormFields.hook";
+import { GoogleSignUpButton } from "@components/button/google-sign-up-button.component";
+import { SignUpFieldGroup } from "@components/sign-up-form/sign-up-form-field-group.component";
+import RedirectLink from "@components/link/direct-link.component";
 
 const defaultFormFields = {
   displayName: "",

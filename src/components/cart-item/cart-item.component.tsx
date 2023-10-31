@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Avatar, Typography, Box } from "@mui/material";
-import { ICartItem } from "../../context/cart.context";
+import { ICartItem } from "@context/cart.context";
 
 interface ICartItemProps {
   cartItem: ICartItem;

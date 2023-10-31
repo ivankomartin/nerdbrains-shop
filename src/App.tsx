@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import Navigation from "./components/navigation/navigation.component";
-import Checkout from "./routes/checkout.component";
-import Home from "./routes/home.component";
-import Shop from "./routes/shop/shop.component";
-import SignIn from "./routes/sign-in.component";
-import SignUp from "./routes/sign-up.component";
+import Navigation from "@components/navigation/navigation.component";
+import Checkout from "@routes/checkout.component";
+import Home from "@routes/home.component";
+import Shop from "@routes/shop/shop.component";
+import SignIn from "@routes/sign-in.component";
+import SignUp from "@routes/sign-up.component";
 
 const App: React.FC = () => {
   return (

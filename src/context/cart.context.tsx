@@ -1,5 +1,5 @@
 import { useEffect, useState, createContext, ReactNode } from "react";
-import { IProduct } from "../types/product.type";
+import { IProduct } from "@typings/product.type";
 
 export interface ICartItem extends IProduct {
   quantity: number;

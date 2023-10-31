@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import CartItem from "../cart-item/cart-item.component";
-import { CartContext } from "../../context/cart.context";
+import CartItem from "@components/cart-item/cart-item.component";
+import { CartContext } from "@context/cart.context";
 
 import { Paper, List, ListItem, Button, Box } from "@mui/material";
 

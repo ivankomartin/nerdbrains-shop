@@ -2,16 +2,16 @@ import { FormEvent, ReactElement } from "react";
 import {
   signInAuthWithEmailAndPassword,
   signInWithGooglePopup,
-} from "../../utils/firebase/firebase.utils";
+} from "@utils/firebase/firebase.utils";
 import { Box, Divider, Typography, Link as MuiLink } from "@mui/material";
-import { useNotification } from "../../hook/useNotification.hook";
+import { useNotification } from "@hook/useNotification.hook";
 import { useTheme } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
-import { getErrorMessage } from "../../utils/firebase/errorHandler.util";
-import useFormFields from "../../hook/useFormFields.hook";
-import { GoogleSignUpButton } from "../button/google-sign-up-button.component";
-import { SignInFieldGroup } from "./sign-in-form-field-group.component";
-import RedirectLink from "../link/direct-link.component";
+import { getErrorMessage } from "@utils/firebase/errorHandler.util";
+import useFormFields from "@hook/useFormFields.hook";
+import { GoogleSignUpButton } from "@components/button/google-sign-up-button.component";
+import { SignInFieldGroup } from "@components/sign-in-form/sign-in-form-field-group.component";
+import RedirectLink from "@components/link/direct-link.component";
 
 const defaultFormFields = {
   email: "",

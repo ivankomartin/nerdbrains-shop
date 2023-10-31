@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext, ICartItem } from "../../context/cart.context";
+import { CartContext, ICartItem } from "@context/cart.context";
 import {
   Card,
   CardMedia,

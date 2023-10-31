@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Favorite as FavoriteIcon } from "@mui/icons-material";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import Img from "../assets/images/t-shirt.jpg";
+import Img from "@assets/images/t-shirt.jpg";
 import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
 import { useTheme } from "@mui/material/styles";
 

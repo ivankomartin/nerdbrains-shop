@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Box } from "@mui/material";
-import ProductCard from "../../components/category/product-card.component";
-import { ProductsContext } from "../../context/products.context";
+import ProductCard from "@components/category/product-card.component";
+import { ProductsContext } from "@context/products.context";
 
 const Shop: React.FC = () => {
   const { products } = useContext(ProductsContext);

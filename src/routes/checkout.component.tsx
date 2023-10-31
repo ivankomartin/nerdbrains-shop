@@ -13,7 +13,7 @@ import {
   ArrowCircleLeftOutlined as ArrowSquareLeft,
   ArrowCircleRightOutlined as ArrowSquareRight,
 } from "@mui/icons-material";
-import { CartContext, ICartItem } from "../context/cart.context";
+import { CartContext, ICartItem } from "@context/cart.context";
 
 const Checkout: React.FC = () => {
   const { cartItems, cartCount, addItemsToCart } = useContext(CartContext);
