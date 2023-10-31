@@ -5,7 +5,7 @@ import { CartContext } from "@context/cart.context";
 
 import { Paper, List, ListItem, Button, Box } from "@mui/material";
 
-const CartDropdown = () => {
+export default function CartDropdown(): JSX.Element {
   const { cartItems } = useContext(CartContext);
   return (
     <Box sx={{ position: "relative" }}>
@@ -46,6 +46,4 @@ const CartDropdown = () => {
       </Paper>
     </Box>
   );
-};
-
-export default CartDropdown;
+}
