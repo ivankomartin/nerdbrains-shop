@@ -36,11 +36,39 @@ const palette = {
   divider: "#eeeeee",
   text: {
     primary: "#141414",
+    secondary: "#ffffff",
   },
 };
 
 const theme = createTheme({
   palette,
+  shadows: [
+    "none",
+    "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+    "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+    "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px",
+    "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+    "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+    "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+    "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+    "rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ],
   components: {
     MuiButton: {
       styleOverrides: {

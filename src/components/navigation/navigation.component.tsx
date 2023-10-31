@@ -1,85 +1,41 @@
-import { useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
-import { UserContext } from "@context/user.context";
-import {
-  Button,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  List,
-  ListItem,
-  Divider,
-  Box,
-} from "@mui/material";
-import { signOutUser } from "@utils/firebase/firebase.utils";
-import CartIcon from "@components/cart-icon/cart-icon.component";
+import React from "react";
+import { Outlet } from "react-router-dom";
+import { AppBar, Box, Toolbar } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-interface NavLink {
-  id: number;
-  title: string;
-  link: string;
-}
+import NavigationMenu from "@components/navigation/navigation-menu.component";
+import Logo from "@components/common/logo.component";
+import NavigationBar from "@components/navigation/navigation-bar.component";
 
 const Navigation: React.FC = () => {
-  const { currentUser } = useContext(UserContext);
-
-  const navigationLinks: NavLink[] = [
-    {
-      id: 1,
-      title: "Shop",
-      link: "/shop",
-    },
-    {
-      id: 2,
-      title: "Checkout",
-      link: "/checkout",
-    },
-  ];
+  const theme = useTheme();
 
   return (
     <Box display="grid" gridTemplateRows="auto 1fr" minHeight="100vh">
-      <AppBar position="sticky" color="default">
+      <AppBar
+        sx={{
+          color: theme.palette.text.primary,
+          background: theme.palette.text.secondary,
+        }}
+      >
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <Link to="/">
-              <img
-                style={{ height: "32px" }}
-                src="https://shuffle.dev/flex-ui-assets/logos/flex-ui-green-light.svg"
-                alt="Flex UI Logo"
-              />
-            </Link>
-          </IconButton>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Flex UI
-          </Typography>
-          <List
-            component="nav"
-            aria-label="main mailbox folders"
-            style={{ display: "flex", flexDirection: "row" }}
+          <Box
+            display="grid"
+            gridTemplateColumns="1fr auto 1fr"
+            width="100%"
+            alignItems="center"
           >
-            {navigationLinks.map((navLink) => (
-              <ListItem button key={navLink.id}>
-                <Link to={navLink.link}>
-                  <Typography variant="body1">{navLink.title}</Typography>
-                </Link>
-              </ListItem>
-            ))}
-          </List>
-          <Divider orientation="vertical" flexItem />
-          {!currentUser ? (
-            <>
-              <Link to="/sign-in">Log In</Link>
-              <Link to="/sign-up">Sign Up</Link>
-            </>
-          ) : (
-            <Button color="secondary" onClick={signOutUser}>
-              Log out
-            </Button>
-          )}
-          <CartIcon />
+            <Box textAlign="left">
+              <NavigationMenu />
+            </Box>
+            <Logo />
+            <Box display="flex" justifyContent="flex-end" gap={2}>
+              <NavigationBar />
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
+
       <Outlet />
     </Box>
   );
