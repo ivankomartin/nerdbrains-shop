@@ -92,6 +92,14 @@ const theme = createTheme({
         },
       ],
     },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: palette.text.primary,
+          fontSize: 12,
+        },
+      },
+    },
   },
 });
 

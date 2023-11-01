@@ -13,6 +13,7 @@ const Navigation: React.FC = () => {
   return (
     <Box display="grid" gridTemplateRows="auto 1fr" minHeight="100vh">
       <AppBar
+        position="static"
         sx={{
           color: theme.palette.text.primary,
           background: theme.palette.text.secondary,

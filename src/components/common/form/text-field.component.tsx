@@ -23,6 +23,7 @@ const TextField: React.FC<ITextFieldProps> = ({
     <MuiTextField
       name={name}
       label={label}
+      color="secondary"
       value={value}
       variant={variant}
       onChange={onChange}
