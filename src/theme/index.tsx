@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { SimplePaletteColorOptions, createTheme } from "@mui/material/styles";
 
 const palette = {
   primary: {
@@ -10,8 +10,9 @@ const palette = {
     main: "#272b09",
     contrastText: "rgba(255,255,255,0.87)",
   },
-  white: {
-    main: "#ffffff",
+  background: {
+    //paper: "#ffffff",
+    default: "#F9FAFB",
   },
   error: {
     light: "#FFE9D5",
@@ -27,7 +28,7 @@ const palette = {
     light: "#CAFDF5",
     main: "#08adca",
     dark: "#003768",
-  },
+  } as SimplePaletteColorOptions,
   success: {
     light: "#D3FCD2",
     main: "#00A76F",

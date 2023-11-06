@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { AppBar, Box, Toolbar } from "@mui/material";
+import { AppBar, Box, Container, Toolbar } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import NavigationMenu from "@components/navigation/navigation-menu.component";
@@ -11,29 +11,37 @@ const Navigation: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <Box display="grid" gridTemplateRows="auto 1fr" minHeight="100vh">
+    <Box
+      display="grid"
+      gridTemplateRows="auto 1fr"
+      minHeight="100vh"
+      sx={{ backgroundColor: theme.palette.background.default }}
+    >
       <AppBar
         position="static"
         sx={{
           color: theme.palette.text.primary,
           background: theme.palette.text.secondary,
+          boxShadow: 1,
         }}
       >
         <Toolbar>
-          <Box
-            display="grid"
-            gridTemplateColumns="1fr auto 1fr"
-            width="100%"
-            alignItems="center"
-          >
-            <Box textAlign="left">
-              <NavigationMenu />
+          <Container>
+            <Box
+              display="grid"
+              gridTemplateColumns="1fr auto 1fr"
+              width="100%"
+              alignItems="center"
+            >
+              <Box textAlign="left">
+                <NavigationMenu />
+              </Box>
+              <Logo />
+              <Box display="flex" justifyContent="flex-end" gap={2}>
+                <NavigationBar />
+              </Box>
             </Box>
-            <Logo />
-            <Box display="flex" justifyContent="flex-end" gap={2}>
-              <NavigationBar />
-            </Box>
-          </Box>
+          </Container>
         </Toolbar>
       </AppBar>
 
