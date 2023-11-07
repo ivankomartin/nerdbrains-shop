@@ -4,7 +4,7 @@ import { AppBar, Box, Container, Toolbar } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import NavigationMenu from "@components/navigation/navigation-menu.component";
-import Logo from "@components/common/logo.component";
+import Logo from "@components/common/logo/logo.component";
 import NavigationBar from "@components/navigation/navigation-bar.component";
 
 const Navigation: React.FC = () => {

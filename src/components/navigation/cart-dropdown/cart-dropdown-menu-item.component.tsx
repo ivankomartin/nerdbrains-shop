@@ -5,8 +5,8 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import theme from "@/theme";
 
-// Define the props according to the data you expect
 interface ICartDropdownMenuItemProps {
   menuList: {
     imageUrl: string;
@@ -30,13 +30,23 @@ const CartDropdownMenuItem: React.FC<ICartDropdownMenuItemProps> = ({
         />
       </ListItemIcon>
       <ListItemText
-        primary={name}
+        primary={
+          <Typography
+            component="span"
+            variant="body2"
+            fontSize={13}
+            fontWeight="bold"
+          >
+            {name}
+          </Typography>
+        }
         secondary={
           <Typography
             component="span"
             variant="body2"
-            color="text.primary"
-            sx={{ display: "block" }}
+            display="block"
+            fontSize={12}
+            color={theme.palette.primary.main}
           >
             {`${quantity} x $${price.toFixed(2)}`}
           </Typography>

@@ -13,6 +13,7 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import Img from "@assets/images/t-shirt.jpg";
 import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
 import { useTheme } from "@mui/material/styles";
+import { IProduct } from "@/types/product.type";
 
 const truncateStyle = {
   display: "-webkit-box",
@@ -21,8 +22,15 @@ const truncateStyle = {
   overflow: "hidden",
 };
 
-export default function SimpleCard(): ReactElement {
+interface IProductCardProps {
+  product: IProduct;
+}
+
+export default function ProductCard({
+  product,
+}: IProductCardProps): ReactElement {
   const theme = useTheme();
+  const { name, imageUrl } = product;
   return (
     <Card sx={{ maxWidth: 300, position: "relative", borderRadius: 6 }}>
       <CardMedia
@@ -35,7 +43,7 @@ export default function SimpleCard(): ReactElement {
           backgroundColor: "#f4f4f4",
           zIndex: 100,
         }}
-        image={Img}
+        image={imageUrl}
         alt="Paella dish"
       />
 
@@ -60,12 +68,9 @@ export default function SimpleCard(): ReactElement {
           fontWeight="bold"
           sx={truncateStyle}
         >
-          title
+          {name}
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={truncateStyle}>
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests.
-        </Typography>
+
         <Box
           sx={{
             display: "flex",
