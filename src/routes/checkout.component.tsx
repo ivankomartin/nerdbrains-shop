@@ -17,23 +17,16 @@ import CloseIcon from "@mui/icons-material/CancelOutlined";
 import AddIcon from "@mui/icons-material/ControlPointOutlined";
 import RemoveIcon from "@mui/icons-material/DoDisturbOnOutlined";
 import { ShoppingCartContext } from "@/context/shopping-cart.context";
+import {
+  decrementProduct,
+  incrementProduct,
+  removeProduct,
+} from "@/context/shopping-cart.helpers";
 
 const Checkout: React.FC = () => {
   const theme = useTheme();
 
   const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
-
-  const handleRemove = (productId: number) => {
-    setShoppingCart({ type: "REMOVE_PRODUCT", payload: { id: productId } });
-  };
-
-  const handleIncrement = (productId: number) => {
-    setShoppingCart({ type: "INCREMENT_PRODUCT", payload: { id: productId } });
-  };
-
-  const handleDecrement = (productId: number) => {
-    setShoppingCart({ type: "DECREMENT_PRODUCT", payload: { id: productId } });
-  };
 
   return (
     <Container sx={{ mt: 4 }}>
@@ -92,14 +85,18 @@ const Checkout: React.FC = () => {
                     </TableCell>
                     <TableCell align="center">
                       <IconButton
-                        onClick={() => handleDecrement(product.id)}
+                        onClick={() =>
+                          setShoppingCart(decrementProduct(product.id))
+                        }
                         size="small"
                       >
                         <RemoveIcon />
                       </IconButton>
                       {product.quantity}
                       <IconButton
-                        onClick={() => handleIncrement(product.id)}
+                        onClick={() =>
+                          setShoppingCart(incrementProduct(product.id))
+                        }
                         size="small"
                       >
                         <AddIcon />
@@ -111,7 +108,9 @@ const Checkout: React.FC = () => {
                     </TableCell>
                     <TableCell align="right">
                       <IconButton
-                        onClick={() => handleRemove(product.id)}
+                        onClick={() =>
+                          setShoppingCart(removeProduct(product.id))
+                        }
                         size="small"
                       >
                         <CloseIcon />
