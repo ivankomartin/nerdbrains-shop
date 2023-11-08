@@ -10,7 +10,7 @@ import { useTheme } from "@mui/material/styles";
 import { useNotification } from "@hook/useNotification.hook";
 import { getErrorMessage } from "@utils/firebase/errorHandler.util";
 import useFormFields from "@hook/useFormFields.hook";
-import { GoogleSignUpButton } from "@components/button/google-sign-up-button.component";
+import { GoogleSignUpButton } from "@/components/common/button/google-sign-up-button.component";
 import { SignUpFieldGroup } from "@components/sign-up-form/sign-up-form-field-group.component";
 import RedirectLink from "@components/link/direct-link.component";
 

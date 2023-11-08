@@ -4,12 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import reportWebVitals from "@/reportWebVitals";
 import { UserProvider } from "@context/user.context";
+import { ShoppingCartProvider } from "./context/shopping-cart.context";
 import { ToastContainer } from "react-toastify";
 import App from "@/App";
 import theme from "@/theme";
 import "@/styles/index.css";
 import "react-toastify/dist/ReactToastify.css";
-import { ShoppingCartProvider } from "./context/shopping-cart/shopping-cart.context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,

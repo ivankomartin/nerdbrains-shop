@@ -16,7 +16,7 @@ import {
 import CloseIcon from "@mui/icons-material/CancelOutlined";
 import AddIcon from "@mui/icons-material/ControlPointOutlined";
 import RemoveIcon from "@mui/icons-material/DoDisturbOnOutlined";
-import { ShoppingCartContext } from "@/context/shopping-cart/shopping-cart.context";
+import { ShoppingCartContext } from "@/context/shopping-cart.context";
 
 const Checkout: React.FC = () => {
   const theme = useTheme();

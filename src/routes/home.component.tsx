@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Container, Grid, Typography } from "@mui/material";
 import PRODUCTS from "@data/shop-data.json";
 import ProductCard from "@/components/common/card/product-card.component";
-import { ShoppingCartContext } from "@/context/shopping-cart/shopping-cart.context";
+import { ShoppingCartContext } from "@/context/shopping-cart.context";
 import { IProduct } from "@/types/product.type";
 
 const Home: React.FC = () => {

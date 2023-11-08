@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { IconButton, Badge, Tooltip } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CartDropdownMenu from "@components/navigation/cart-dropdown/cart-dropdown-menu.component";
-import { ShoppingCartContext } from "@/context/shopping-cart/shopping-cart.context";
+import { ShoppingCartContext } from "@/context/shopping-cart.context";
 
 const CartDropdown: React.FC = () => {
   const [isOpenCart, setIsOpenCart] = React.useState<null | HTMLElement>(null);
