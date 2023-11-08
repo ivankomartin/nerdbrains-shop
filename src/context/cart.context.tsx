@@ -1,15 +1,15 @@
 import { useEffect, useState, createContext, ReactNode } from "react";
 import { IProduct } from "@typings/product.type";
 
-export interface ICartItem extends IProduct {
+export interface ICartProduct extends IProduct {
   quantity: number;
 }
 
 type CartContextType = {
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
-  cartItems: ICartItem[];
-  addItemsToCart: (product: ICartItem) => void;
+  cartItems: ICartProduct[];
+  addItemsToCart: (product: ICartProduct) => void;
   cartCount: number;
 };
 
@@ -22,9 +22,9 @@ export const CartContext = createContext<CartContextType>({
 });
 
 const addCartItem = (
-  cartItems: ICartItem[],
-  productToCart: ICartItem,
-): ICartItem[] => {
+  cartItems: ICartProduct[],
+  productToCart: ICartProduct,
+): ICartProduct[] => {
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToCart.id,
   );
@@ -46,10 +46,10 @@ type CartProviderProps = {
 
 const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
-  const [cartItems, setCartItems] = useState<ICartItem[]>([]);
+  const [cartItems, setCartItems] = useState<ICartProduct[]>([]);
   const [cartCount, setCartCount] = useState<number>(0);
 
-  const addItemsToCart = (productToCart: ICartItem) => {
+  const addItemsToCart = (productToCart: ICartProduct) => {
     setCartItems(addCartItem(cartItems, productToCart));
   };
 

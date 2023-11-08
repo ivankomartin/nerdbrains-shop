@@ -1,12 +1,12 @@
 import { IProduct } from "@typings/product.type";
 
-export interface ICartItem extends IProduct {
+export interface ICartProduct extends IProduct {
   quantity: number;
 }
 
 export interface IShoppingCartState {
-  itemsInCart: ICartItem[];
-  totalItemsCount: number;
+  productsInCart: ICartProduct[];
+  totalProductCount: number;
 }
 
 export type EShoppingCartAction =

@@ -7,7 +7,7 @@ import { ShoppingCartContext } from "@/context/shopping-cart.context";
 const CartDropdown: React.FC = () => {
   const [isOpenCart, setIsOpenCart] = React.useState<null | HTMLElement>(null);
 
-  const { state } = useContext(ShoppingCartContext);
+  const { shoppingCart } = useContext(ShoppingCartContext);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setIsOpenCart(event.currentTarget);
@@ -21,7 +21,7 @@ const CartDropdown: React.FC = () => {
     <>
       <Tooltip title="Shopping cart">
         <IconButton onClick={handleMenuOpen} color="inherit">
-          <Badge badgeContent={state.totalItemsCount} color="error">
+          <Badge badgeContent={shoppingCart.totalProductCount} color="error">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -29,7 +29,7 @@ const CartDropdown: React.FC = () => {
       <CartDropdownMenu
         isOpenCart={isOpenCart}
         handleMenuClose={handleMenuClose}
-        menuList={state.itemsInCart}
+        menuList={shoppingCart.productsInCart}
       />
     </>
   );

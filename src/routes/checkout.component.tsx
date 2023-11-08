@@ -21,18 +21,18 @@ import { ShoppingCartContext } from "@/context/shopping-cart.context";
 const Checkout: React.FC = () => {
   const theme = useTheme();
 
-  const { state, dispatch } = useContext(ShoppingCartContext);
+  const { shoppingCart, setShoppingCart } = useContext(ShoppingCartContext);
 
   const handleRemove = (productId: number) => {
-    dispatch({ type: "REMOVE_PRODUCT", payload: { id: productId } });
+    setShoppingCart({ type: "REMOVE_PRODUCT", payload: { id: productId } });
   };
 
   const handleIncrement = (productId: number) => {
-    dispatch({ type: "INCREMENT_PRODUCT", payload: { id: productId } });
+    setShoppingCart({ type: "INCREMENT_PRODUCT", payload: { id: productId } });
   };
 
   const handleDecrement = (productId: number) => {
-    dispatch({ type: "DECREMENT_PRODUCT", payload: { id: productId } });
+    setShoppingCart({ type: "DECREMENT_PRODUCT", payload: { id: productId } });
   };
 
   return (
@@ -41,7 +41,7 @@ const Checkout: React.FC = () => {
         Checkout
       </Typography>
 
-      {state.totalItemsCount > 0 && (
+      {shoppingCart.totalProductCount > 0 && (
         <Paper>
           <Box p={2}>
             <Table size="small">
@@ -64,7 +64,7 @@ const Checkout: React.FC = () => {
                 </TableRow>
               </TableHead>
               <TableBody sx={{ "& td, & th": { border: 0 } }}>
-                {state.itemsInCart.map((product) => (
+                {shoppingCart.productsInCart.map((product) => (
                   <TableRow
                     key={product.id}
                     sx={{
@@ -124,7 +124,7 @@ const Checkout: React.FC = () => {
           </Box>
         </Paper>
       )}
-      {state.totalItemsCount === 0 && (
+      {shoppingCart.totalProductCount === 0 && (
         <Typography component="p">No items</Typography>
       )}
     </Container>

@@ -1,12 +1,12 @@
 import {
   addProductToCart,
-  decrementProductInCart,
-  findExistingCartItemIndex,
-  incrementProductInCart,
-  newTotalCountAdd,
-  newTotalCountAfterDecrementCountOfProducts,
-  newTotalCountAfterIncrementCountOfProducts,
-  newTotalCountAfterRemoveProductFromCart,
+  decrementProductQuantity,
+  findExistingProductIndex,
+  incrementProductQuantity,
+  calculateNewTotalCount,
+  calculateTotalAfterDecrement,
+  calculateTotalAfterIncrement,
+  calculateTotalAfterRemoval,
   removeProductFromCart,
 } from "@/action/shopping-cart.action";
 import { EShoppingCartAction, IShoppingCartState } from "@/types/cart.type";
@@ -17,39 +17,39 @@ export const shoppingCartReducer = (
 ): IShoppingCartState => {
   switch (action.type) {
     case "ADD_PRODUCT":
-      const existingCartItemIndex = findExistingCartItemIndex(state, action);
+      const existingProductIndex = findExistingProductIndex(state, action);
 
-      const newItemsInCart = addProductToCart(
+      const newProductsInCart = addProductToCart(
         state,
         action,
-        existingCartItemIndex,
+        existingProductIndex,
       );
 
       return {
         ...state,
-        itemsInCart: newItemsInCart,
-        totalItemsCount: newTotalCountAdd(newItemsInCart),
+        productsInCart: newProductsInCart,
+        totalProductCount: calculateNewTotalCount(newProductsInCart),
       };
 
     case "REMOVE_PRODUCT":
       return {
         ...state,
-        itemsInCart: removeProductFromCart(state, action),
-        totalItemsCount: newTotalCountAfterRemoveProductFromCart(state, action),
+        productsInCart: removeProductFromCart(state, action),
+        totalProductCount: calculateTotalAfterRemoval(state, action),
       };
 
     case "DECREMENT_PRODUCT":
       return {
         ...state,
-        itemsInCart: decrementProductInCart(state, action),
-        totalItemsCount: newTotalCountAfterDecrementCountOfProducts(state),
+        productsInCart: decrementProductQuantity(state, action),
+        totalProductCount: calculateTotalAfterDecrement(state),
       };
 
     case "INCREMENT_PRODUCT":
       return {
         ...state,
-        itemsInCart: incrementProductInCart(state, action),
-        totalItemsCount: newTotalCountAfterIncrementCountOfProducts(state),
+        productsInCart: incrementProductQuantity(state, action),
+        totalProductCount: calculateTotalAfterIncrement(state),
       };
 
     default:

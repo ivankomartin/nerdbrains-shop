@@ -6,10 +6,10 @@ import { ShoppingCartContext } from "@/context/shopping-cart.context";
 import { IProduct } from "@/types/product.type";
 
 const Home: React.FC = () => {
-  const { dispatch } = useContext(ShoppingCartContext);
+  const { setShoppingCart } = useContext(ShoppingCartContext);
 
   const addToCart = (product: IProduct) => {
-    dispatch({
+    setShoppingCart({
       type: "ADD_PRODUCT",
       payload: product,
     });

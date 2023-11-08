@@ -1,81 +1,83 @@
 import {
   EShoppingCartAction,
-  ICartItem,
+  ICartProduct,
   IShoppingCartState,
 } from "@/types/cart.type";
 
 export const addProductToCart = (
   state: IShoppingCartState,
   action: EShoppingCartAction,
-  existingCartItemIndex: number,
-): ICartItem[] => {
-  const newItemsInCart = [...state.itemsInCart];
+  existingProductIndex: number,
+): ICartProduct[] => {
+  const newProductsInCart = [...state.productsInCart];
 
-  if (existingCartItemIndex !== -1) {
-    const existingCartItem = newItemsInCart[existingCartItemIndex];
-    newItemsInCart[existingCartItemIndex] = {
-      ...existingCartItem,
-      quantity: existingCartItem.quantity + 1,
+  if (existingProductIndex !== -1) {
+    const existingProduct = newProductsInCart[existingProductIndex];
+    newProductsInCart[existingProductIndex] = {
+      ...existingProduct,
+      quantity: existingProduct.quantity + 1,
     };
   } else {
-    newItemsInCart.push({
-      ...(action.payload as ICartItem),
+    newProductsInCart.push({
+      ...(action.payload as ICartProduct),
       quantity: 1,
     });
   }
 
-  return newItemsInCart;
+  return newProductsInCart;
 };
 
-export const newTotalCountAdd = (newItemsInCart: ICartItem[]): number =>
-  newItemsInCart.reduce((total, item) => total + item.quantity, 0);
+export const calculateNewTotalCount = (
+  newProductsInCart: ICartProduct[],
+): number =>
+  newProductsInCart.reduce((total, product) => total + product.quantity, 0);
 
-export const newTotalCountAfterIncrementCountOfProducts = (
+export const calculateTotalAfterIncrement = (
   state: IShoppingCartState,
 ): number =>
-  state.itemsInCart.reduce((total, item) => total + item.quantity, 0);
+  state.productsInCart.reduce((total, product) => total + product.quantity, 0);
 
-export const newTotalCountAfterDecrementCountOfProducts = (
+export const calculateTotalAfterDecrement = (
   state: IShoppingCartState,
 ): number =>
-  state.itemsInCart.reduce((total, item) => total + item.quantity, 0);
+  state.productsInCart.reduce((total, product) => total + product.quantity, 0);
 
-export const newTotalCountAfterRemoveProductFromCart = (
+export const calculateTotalAfterRemoval = (
   state: IShoppingCartState,
   action: EShoppingCartAction,
 ): number =>
-  state.itemsInCart
-    .filter((item) => item.id !== action.payload.id)
-    .reduce((total, item) => total + item.quantity, 0);
+  state.productsInCart
+    .filter((product) => product.id !== action.payload.id)
+    .reduce((total, product) => total + product.quantity, 0);
 
-export const incrementProductInCart = (
+export const incrementProductQuantity = (
   state: IShoppingCartState,
   action: EShoppingCartAction,
-): ICartItem[] =>
-  state.itemsInCart.map((item) =>
-    item.id === action.payload.id
-      ? { ...item, quantity: item.quantity + 1 }
-      : item,
+): ICartProduct[] =>
+  state.productsInCart.map((product) =>
+    product.id === action.payload.id
+      ? { ...product, quantity: product.quantity + 1 }
+      : product,
   );
 
 export const removeProductFromCart = (
   state: IShoppingCartState,
   action: EShoppingCartAction,
-): ICartItem[] =>
-  state.itemsInCart.filter((item) => item.id !== action.payload.id);
+): ICartProduct[] =>
+  state.productsInCart.filter((product) => product.id !== action.payload.id);
 
-export const decrementProductInCart = (
+export const decrementProductQuantity = (
   state: IShoppingCartState,
   action: EShoppingCartAction,
-): ICartItem[] =>
-  state.itemsInCart.map((item) =>
-    item.id === action.payload.id
-      ? { ...item, quantity: Math.max(0, item.quantity - 1) }
-      : item,
+): ICartProduct[] =>
+  state.productsInCart.map((product) =>
+    product.id === action.payload.id
+      ? { ...product, quantity: Math.max(0, product.quantity - 1) }
+      : product,
   );
 
-export const findExistingCartItemIndex = (
+export const findExistingProductIndex = (
   state: IShoppingCartState,
   action: EShoppingCartAction,
 ): number =>
-  state.itemsInCart.findIndex((item) => item.id === action.payload.id);
+  state.productsInCart.findIndex((product) => product.id === action.payload.id);

@@ -3,12 +3,12 @@ import { Menu, Button } from "@mui/material";
 
 import { Link } from "react-router-dom";
 import CartDropdownMenuItem from "./cart-dropdown-menu-item.component";
-import { ICartItem } from "@/types/cart.type";
+import { ICartProduct } from "@/types/cart.type";
 
 interface ICartDropdownMenuProps {
   isOpenCart: null | HTMLElement;
   handleMenuClose: () => void;
-  menuList: ICartItem[];
+  menuList: ICartProduct[];
 }
 
 export default function CartDropdownMenu(

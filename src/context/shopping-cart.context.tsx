@@ -3,16 +3,16 @@ import { EShoppingCartAction, IShoppingCartState } from "@/types/cart.type";
 import { useReducer, createContext, ReactNode } from "react";
 
 const initialState: IShoppingCartState = {
-  itemsInCart: [],
-  totalItemsCount: 0,
+  productsInCart: [],
+  totalProductCount: 0,
 };
 
 export const ShoppingCartContext = createContext<{
-  state: IShoppingCartState;
-  dispatch: React.Dispatch<EShoppingCartAction>;
+  shoppingCart: IShoppingCartState;
+  setShoppingCart: React.Dispatch<EShoppingCartAction>;
 }>({
-  state: initialState,
-  dispatch: () => null,
+  shoppingCart: initialState,
+  setShoppingCart: () => null,
 });
 
 type ShoppingCartProviderProps = {
@@ -22,10 +22,13 @@ type ShoppingCartProviderProps = {
 export const ShoppingCartProvider: React.FC<ShoppingCartProviderProps> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(shoppingCartReducer, initialState);
+  const [shoppingCart, setShoppingCart] = useReducer(
+    shoppingCartReducer,
+    initialState,
+  );
 
   return (
-    <ShoppingCartContext.Provider value={{ state, dispatch }}>
+    <ShoppingCartContext.Provider value={{ shoppingCart, setShoppingCart }}>
       {children}
     </ShoppingCartContext.Provider>
   );
