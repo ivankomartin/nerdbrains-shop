@@ -10,7 +10,7 @@ const Home: React.FC = () => {
 
   const addToCart = (product: IProduct) => {
     dispatch({
-      type: "ADD_ITEM",
+      type: "ADD_PRODUCT",
       payload: product,
     });
   };

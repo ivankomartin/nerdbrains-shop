@@ -1,4 +1,5 @@
 import {
+  addProductToCart,
   decrementProductInCart,
   findExistingCartItemIndex,
   incrementProductInCart,
@@ -15,22 +16,14 @@ export const shoppingCartReducer = (
   action: EShoppingCartAction,
 ): IShoppingCartState => {
   switch (action.type) {
-    case "ADD_ITEM":
+    case "ADD_PRODUCT":
       const existingCartItemIndex = findExistingCartItemIndex(state, action);
-      const newItemsInCart = [...state.itemsInCart];
 
-      if (existingCartItemIndex !== -1) {
-        const existingCartItem = newItemsInCart[existingCartItemIndex];
-        newItemsInCart[existingCartItemIndex] = {
-          ...existingCartItem,
-          quantity: existingCartItem.quantity + 1,
-        };
-      } else {
-        newItemsInCart.push({
-          ...action.payload,
-          quantity: 1,
-        });
-      }
+      const newItemsInCart = addProductToCart(
+        state,
+        action,
+        existingCartItemIndex,
+      );
 
       return {
         ...state,
@@ -38,21 +31,21 @@ export const shoppingCartReducer = (
         totalItemsCount: newTotalCountAdd(newItemsInCart),
       };
 
-    case "REMOVE_ITEM":
+    case "REMOVE_PRODUCT":
       return {
         ...state,
         itemsInCart: removeProductFromCart(state, action),
         totalItemsCount: newTotalCountAfterRemoveProductFromCart(state, action),
       };
 
-    case "DECREMENT_ITEM":
+    case "DECREMENT_PRODUCT":
       return {
         ...state,
         itemsInCart: decrementProductInCart(state, action),
         totalItemsCount: newTotalCountAfterDecrementCountOfProducts(state),
       };
 
-    case "INCREMENT_ITEM":
+    case "INCREMENT_PRODUCT":
       return {
         ...state,
         itemsInCart: incrementProductInCart(state, action),

@@ -24,15 +24,15 @@ const Checkout: React.FC = () => {
   const { state, dispatch } = useContext(ShoppingCartContext);
 
   const handleRemove = (productId: number) => {
-    dispatch({ type: "REMOVE_ITEM", payload: { id: productId } });
+    dispatch({ type: "REMOVE_PRODUCT", payload: { id: productId } });
   };
 
   const handleIncrement = (productId: number) => {
-    dispatch({ type: "INCREMENT_ITEM", payload: { id: productId } });
+    dispatch({ type: "INCREMENT_PRODUCT", payload: { id: productId } });
   };
 
   const handleDecrement = (productId: number) => {
-    dispatch({ type: "DECREMENT_ITEM", payload: { id: productId } });
+    dispatch({ type: "DECREMENT_PRODUCT", payload: { id: productId } });
   };
 
   return (

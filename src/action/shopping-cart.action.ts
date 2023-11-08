@@ -4,6 +4,29 @@ import {
   IShoppingCartState,
 } from "@/types/cart.type";
 
+export const addProductToCart = (
+  state: IShoppingCartState,
+  action: EShoppingCartAction,
+  existingCartItemIndex: number,
+): ICartItem[] => {
+  const newItemsInCart = [...state.itemsInCart];
+
+  if (existingCartItemIndex !== -1) {
+    const existingCartItem = newItemsInCart[existingCartItemIndex];
+    newItemsInCart[existingCartItemIndex] = {
+      ...existingCartItem,
+      quantity: existingCartItem.quantity + 1,
+    };
+  } else {
+    newItemsInCart.push({
+      ...(action.payload as ICartItem),
+      quantity: 1,
+    });
+  }
+
+  return newItemsInCart;
+};
+
 export const newTotalCountAdd = (newItemsInCart: ICartItem[]): number =>
   newItemsInCart.reduce((total, item) => total + item.quantity, 0);
 
