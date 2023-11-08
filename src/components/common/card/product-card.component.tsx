@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { Favorite as FavoriteIcon } from "@mui/icons-material";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import Img from "@assets/images/t-shirt.jpg";
 import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
 import { useTheme } from "@mui/material/styles";
 import { IProduct } from "@/types/product.type";
@@ -24,13 +23,15 @@ const truncateStyle = {
 
 interface IProductCardProps {
   product: IProduct;
+  addToCart: (product: IProduct) => void;
 }
 
 export default function ProductCard({
   product,
+  addToCart,
 }: IProductCardProps): ReactElement {
   const theme = useTheme();
-  const { name, imageUrl } = product;
+  const { name, imageUrl, price } = product;
   return (
     <Card sx={{ maxWidth: 300, position: "relative", borderRadius: 6 }}>
       <CardMedia
@@ -80,13 +81,13 @@ export default function ProductCard({
           }}
         >
           <Typography variant="h6" component="span">
-            20.99 €
+            {price} €
           </Typography>
           <CardActions sx={{ marginRight: theme.spacing(-2) }}>
             <IconButton aria-label="detail">
               <ZoomInOutlinedIcon color="primary" />
             </IconButton>
-            <IconButton aria-label="buy">
+            <IconButton aria-label="buy" onClick={() => addToCart(product)}>
               <ShoppingBagOutlinedIcon color="primary" />
             </IconButton>
           </CardActions>

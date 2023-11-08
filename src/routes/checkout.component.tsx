@@ -1,99 +1,133 @@
 import React, { useContext } from "react";
 import {
   Box,
+  Container,
   Table,
+  TableHead,
   TableBody,
   TableCell,
   TableRow,
   Typography,
-  Button,
+  IconButton,
+  Paper,
+  useTheme,
 } from "@mui/material";
-import {
-  HighlightOffOutlined as CloseCircle,
-  ArrowCircleLeftOutlined as ArrowSquareLeft,
-  ArrowCircleRightOutlined as ArrowSquareRight,
-} from "@mui/icons-material";
-import { CartContext, ICartItem } from "@context/cart.context";
+
+import CloseIcon from "@mui/icons-material/CancelOutlined";
+import AddIcon from "@mui/icons-material/ControlPointOutlined";
+import RemoveIcon from "@mui/icons-material/DoDisturbOnOutlined";
+import { ShoppingCartContext } from "@/context/shopping-cart/shopping-cart.context";
 
 const Checkout: React.FC = () => {
-  const { cartItems, cartCount, addItemsToCart } = useContext(CartContext);
+  const theme = useTheme();
+
+  const { state, dispatch } = useContext(ShoppingCartContext);
+
+  const handleRemove = (productId: number) => {
+    dispatch({ type: "REMOVE_ITEM", payload: { id: productId } });
+  };
+
+  const handleIncrement = (productId: number) => {
+    dispatch({ type: "INCREMENT_ITEM", payload: { id: productId } });
+  };
+
+  const handleDecrement = (productId: number) => {
+    dispatch({ type: "DECREMENT_ITEM", payload: { id: productId } });
+  };
 
   return (
-    <Box py={{ xs: 12, md: 24 }} bgcolor="coolGray.50">
-      <Box px={4} mx="auto">
-        <Box display="flex" justifyContent="space-between" mb={4}>
-          <Box>
-            <Typography variant="h6">Checkout</Typography>
-            <Typography variant="body2">{cartCount} Items in Cart</Typography>
-          </Box>
-        </Box>
+    <Container sx={{ mt: 4 }}>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Checkout
+      </Typography>
 
-        <Box boxShadow={1} borderRadius={1} borderColor="coolGray.100">
-          <Table>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  <Typography variant="body2">Product</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography variant="body2">Description</Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Typography variant="body2">Quantity</Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Typography variant="body2">Price</Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Typography variant="body2">Remove</Typography>
-                </TableCell>
-              </TableRow>
-              {cartItems.map((product: ICartItem) => (
-                <TableRow key={product.id}>
-                  <TableCell>
-                    <Box display="flex" alignItems="center">
-                      <img
-                        src={product.imageUrl}
-                        alt={product.name}
-                        style={{
-                          width: "40px",
-                          borderRadius: "50%",
-                        }}
-                      />
-                      <Typography variant="body2" ml={2}>
-                        {product.name}
-                      </Typography>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="body2">United Kingdom</Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    <Box display="flex" alignItems="center">
-                      <ArrowSquareLeft />
-                      <Typography variant="body2" mx={4}>
-                        {product.quantity}
-                      </Typography>
-                      <Button onClick={() => addItemsToCart(product)}>
-                        <ArrowSquareRight />
-                      </Button>
-                    </Box>
-                  </TableCell>
-                  <TableCell align="center">
-                    <Typography variant="body2" color="green">
-                      {product.price}
-                    </Typography>
-                  </TableCell>
-                  <TableCell align="center">
-                    <CloseCircle />
-                  </TableCell>
+      {state.totalItemsCount > 0 && (
+        <Paper>
+          <Box p={2}>
+            <Table size="small">
+              <TableHead>
+                <TableRow
+                  sx={{
+                    "&": {
+                      borderRadius: 1,
+                      background: "red",
+                      backgroundColor: theme.palette.grey[200],
+                      border: `1px solid ${theme.palette.divider}`,
+                    },
+                  }}
+                >
+                  <TableCell>Product</TableCell>
+                  <TableCell align="center">Quantity</TableCell>
+                  <TableCell align="right">Price per piece</TableCell>
+                  <TableCell align="right">Total</TableCell>
+                  <TableCell align="right">Remove</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </Box>
-    </Box>
+              </TableHead>
+              <TableBody sx={{ "& td, & th": { border: 0 } }}>
+                {state.itemsInCart.map((product) => (
+                  <TableRow
+                    key={product.id}
+                    sx={{
+                      "&:hover": {
+                        backgroundColor: theme.palette.grey[100],
+                        cursor: "pointer",
+                      },
+                      "& td": { py: 1 },
+                    }}
+                  >
+                    <TableCell>
+                      <Box display="flex" alignItems="center">
+                        <img
+                          src={product.imageUrl}
+                          alt={product.name}
+                          style={{
+                            width: 35,
+                            height: 30,
+                            marginRight: "10px",
+                            borderRadius: 2,
+                          }}
+                        />
+                        <Typography>{product.name}</Typography>
+                      </Box>
+                    </TableCell>
+                    <TableCell align="center">
+                      <IconButton
+                        onClick={() => handleDecrement(product.id)}
+                        size="small"
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                      {product.quantity}
+                      <IconButton
+                        onClick={() => handleIncrement(product.id)}
+                        size="small"
+                      >
+                        <AddIcon />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell align="right">${product.price}</TableCell>
+                    <TableCell align="right">
+                      ${product.price * product.quantity}
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton
+                        onClick={() => handleRemove(product.id)}
+                        size="small"
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Box>
+        </Paper>
+      )}
+      {state.totalItemsCount === 0 && (
+        <Typography component="p">No items</Typography>
+      )}
+    </Container>
   );
 };
 
