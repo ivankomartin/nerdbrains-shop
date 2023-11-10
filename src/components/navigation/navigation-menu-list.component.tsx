@@ -10,19 +10,15 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const user = {
   name: "Martin Ivanko",
   photo: "@assets/images/user.jpg",
 };
 const menuLinks = [
-  { text: "Inbox", path: "/inbox", icon: <InboxIcon /> },
-  { text: "Starred", path: "/starred", icon: <MailIcon /> },
-  { text: "Send email", path: "/send-email", icon: <InboxIcon /> },
-  { text: "Drafts", path: "/drafts", icon: <MailIcon /> },
+  { text: "Checkout", path: "/checkout", icon: <ShoppingCartOutlinedIcon /> },
 ];
 
 export default function NavigationMenuList(): JSX.Element {
