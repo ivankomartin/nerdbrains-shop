@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import reportWebVitals from "@/reportWebVitals";
-import { UserProvider } from "@context/user.context";
+import { CurrentUserProvider } from "@context/current-user.context";
 import { ShoppingCartProvider } from "./context/shopping-cart.context";
 import { ToastContainer } from "react-toastify";
 import App from "@/App";
@@ -18,12 +18,12 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <UserProvider>
+        <CurrentUserProvider>
           <ShoppingCartProvider>
             <ToastContainer />
             <App />
           </ShoppingCartProvider>
-        </UserProvider>
+        </CurrentUserProvider>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,

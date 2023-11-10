@@ -3,27 +3,25 @@ import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
 } from "@utils/firebase/firebase.utils";
+import { User } from "firebase/auth";
 
-type User = {
-  uid: string;
-  // ... other properties of the user object
-};
-
-type UserContextType = {
+type CurrentUserContextType = {
   currentUser: User | null;
   setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
 };
 
-export const UserContext = createContext<UserContextType>({
+export const CurrentUserContext = createContext<CurrentUserContextType>({
   currentUser: null,
   setCurrentUser: () => {},
 });
 
-interface UserProviderProps {
+interface CurrentUserProviderProps {
   children: ReactNode;
 }
 
-export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+export const CurrentUserProvider: React.FC<CurrentUserProviderProps> = ({
+  children,
+}) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const value = { currentUser, setCurrentUser };
 
@@ -36,7 +34,11 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     });
 
     return unsubscribe;
-  }, []);
+  }, [currentUser]);
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return (
+    <CurrentUserContext.Provider value={value}>
+      {children}
+    </CurrentUserContext.Provider>
+  );
 };
