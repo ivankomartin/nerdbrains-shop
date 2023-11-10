@@ -54,7 +54,7 @@ export const SignUpFieldGroup: React.FC<SignUpFieldGroupProps> = ({
         required
       />
       <Button type="submit" fullWidth variant="contained" color="primary">
-        Sign In
+        Sign Up
       </Button>
     </Box>
   </form>

@@ -13,6 +13,7 @@ import useFormFields from "@hook/useFormFields.hook";
 import { GoogleSignUpButton } from "@/components/common/button/google-sign-up-button.component";
 import { SignUpFieldGroup } from "@components/sign-up-form/sign-up-form-field-group.component";
 import RedirectLink from "@components/link/direct-link.component";
+import { useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
   displayName: "",
@@ -23,6 +24,7 @@ const defaultFormFields = {
 
 export default function SignInForm(): ReactElement {
   const theme = useTheme();
+  const navigate = useNavigate();
   const { notification } = useNotification();
 
   const { formFields, handleChange, resetFormFields } =
@@ -48,9 +50,9 @@ export default function SignInForm(): ReactElement {
       await createUserDocumentFromAuth(user, {
         displayName: formFields.displayName,
       });
-
       resetFormFields();
       notification("You were successfully signed up.", "success");
+      navigate("/");
     } catch (error) {
       notification(getErrorMessage(error as { code?: string }), "error");
     }

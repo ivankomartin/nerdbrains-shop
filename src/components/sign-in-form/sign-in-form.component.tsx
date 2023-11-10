@@ -6,7 +6,7 @@ import {
 import { Box, Divider, Typography, Link as MuiLink } from "@mui/material";
 import { useNotification } from "@hook/useNotification.hook";
 import { useTheme } from "@mui/material/styles";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { getErrorMessage } from "@utils/firebase/errorHandler.util";
 import useFormFields from "@hook/useFormFields.hook";
 import { GoogleSignUpButton } from "@/components/common/button/google-sign-up-button.component";
@@ -21,11 +21,17 @@ const defaultFormFields = {
 export default function SignInForm(): ReactElement {
   const { notification } = useNotification();
   const theme = useTheme();
+  const navigate = useNavigate();
   const { formFields, handleChange, resetFormFields } =
     useFormFields(defaultFormFields);
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+    try {
+      await signInWithGooglePopup();
+      notification("Successfully logged in!", "success");
+    } catch (error) {
+      notification(getErrorMessage(error as { code?: string }), "error");
+    }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -36,8 +42,9 @@ export default function SignInForm(): ReactElement {
         formFields.email,
         formFields.password,
       );
-      notification("Successfully logged in!", "success");
       resetFormFields();
+      notification("Successfully logged in!", "success");
+      navigate("/");
     } catch (error) {
       notification(getErrorMessage(error as { code?: string }), "error");
     }

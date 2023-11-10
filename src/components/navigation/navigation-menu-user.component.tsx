@@ -3,9 +3,21 @@ import { Avatar, Box, Typography, Link as MuiLink } from "@mui/material";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "@/context/current-user.context";
 import { signOutUser } from "@/utils/firebase/firebase.utils";
+import { useNotification } from "@/hook/useNotification.hook";
 
 export default function NavigationMenuUser(): JSX.Element {
   const { currentUser } = useContext(CurrentUserContext);
+
+  const { notification } = useNotification();
+
+  const SignOut = async () => {
+    try {
+      await signOutUser();
+      notification("You were successfully signed out.", "info");
+    } catch (error) {
+      notification("An error occurred during sign out.", "error");
+    }
+  };
 
   return (
     <Box
@@ -24,7 +36,7 @@ export default function NavigationMenuUser(): JSX.Element {
           <Typography>
             {currentUser.displayName || currentUser.email}
           </Typography>
-          <MuiLink component={Link} to="/" onClick={() => signOutUser()}>
+          <MuiLink component={Link} to="/" onClick={() => SignOut()}>
             Sign out
           </MuiLink>
         </>
