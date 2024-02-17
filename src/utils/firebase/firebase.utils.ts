@@ -12,10 +12,12 @@ import {
 import {
   DocumentReference,
   Firestore,
+  collection,
   doc,
   getDoc,
   getFirestore,
   setDoc,
+  writeBatch,
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 /* eslint-disable */
@@ -40,6 +42,21 @@ export const auth: Auth = getAuth();
 export const signInWithGooglePopup = (): Promise<any> =>
   signInWithPopup(auth, provider);
 export const db: Firestore = getFirestore();
+
+export const addCollectionAndDocument = async (
+  collectionKey: string,
+  objectsToAdd: any[],
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+};
 
 export const createUserDocumentFromAuth = async (
   userAuth: User | null,

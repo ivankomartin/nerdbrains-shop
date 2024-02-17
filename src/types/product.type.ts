@@ -4,3 +4,10 @@ export interface IProduct {
   imageUrl: string;
   price: number;
 }
+
+export interface ICollectionOfProducts {
+  title: string;
+  products: IProduct[];
+}
+
+export interface ICollectionOfProducts {}
